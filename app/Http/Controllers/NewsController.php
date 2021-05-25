@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Category;
 use App\News;
+use App\Comment;
+
 use Illuminate\Http\Request;
 
 class NewsController extends Controller

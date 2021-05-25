@@ -76,8 +76,48 @@
                     <form>
             </div>
         </div>
+
+
+{{--        Comment--}}
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header">Comment
+                    <small>List Comment</small>
+                </h1>
+            </div>
+
+            <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+                <thead>
+                <tr align="center">
+                    <th>ID</th>
+                    <th>Người dùng</th>
+                    <th>Nội dung</th>
+                    <th>Ngày đăng</th>
+                    <th>Ngày cập nhật</th>
+
+                    <th>Delete</th>
+                    <th>Edit</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach($news->comment as $item)
+                    <tr class="odd gradeX" align="center">
+                        <td>{{$item->id}}</td>
+                        <td>{{$item->user->name}}</td>
+                        <td>{{$item->content}}</td>
+                        <td>{{$item->created_at}}</td>
+                        <td>{{$item->updated_at}}</td>
+
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/comment/delete/{{$item['id']}}"> Delete</a></td>
+                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/category/edit/{{$item['id']}}">Edit</a></td>
+                    </tr>
+                @endforeach
+                </tbody>
+            </table>
+        </div>
         <!-- /.row -->
     </div>
     <!-- /.container-fluid -->
 </div>
+
 @endsection
