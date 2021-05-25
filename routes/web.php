@@ -34,7 +34,8 @@ Route::group(['prefix'=>'admin'], function (){
     // tin tuc
     Route::group(['prefix'=>'news'], function(){
         Route::get('list', 'NewsController@getList');
-        Route::get('edit', 'NewsController@getEdit');
+        Route::get('edit/{id}', 'NewsController@getEdit');
+        Route::post('edit/{id}', 'NewsController@postEdit');
         Route::get('add', 'NewsController@getAdd');
         Route::post('add', 'NewsController@postAdd');
         Route::get('delete/{id}', 'NewsController@getDelete');

@@ -44,31 +44,93 @@ class NewsController extends Controller
 //
 //        var_dump($news);
 //        die();
-        if($request->hasFile('image')){
+        if($request->hasFile('image')) {
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
-            if ($path != 'jpg' && $path != 'png'){
+            if ($path != 'jpg' && $path != 'png') {
                 return redirect('admin/category/add')->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
-            $image = str_random(4)."_".$name;
-        }
-        // Tranh trung ten image
-        while (file_exists("uploads/news/".$image)){
-            $image = str_random(4)."_".$name;
-        }
-        $file->move("uploads/news", $image);
-        $news->image = $image;
+            $image = str_random(4) . "_" . $name;
 
+            // Tranh trung ten image
+            while (file_exists("uploads/news/" . $image)) {
+                $image = str_random(4) . "_" . $name;
+            }
+            $file->move("uploads/news", $image);
+            $news->image = $image;
+        }else{
+            $news->image = "";
+        }
         $news->save();
-        return redirect('admin/category/add')->with('message', 'Thêm thành công');
+        return redirect('admin/news/edit')->with('message', 'Thêm thành công');
     }
 
     //  Xoa tin tuc
     public function getDelete($id){
         $news = News::find($id);
+
         $news->delete();
         return redirect('admin/news/list')->with('message', 'xoa tin tuc thành công');
+    }
+
+    //  chinh sua tin tuc
+    public function getEdit($id){
+        $news = News::find($id);
+        $category = Category::all();
+
+        return view('admin.news.edit', compact('news', 'category'));
+    }
+    public function postEdit(Request $request,$id){
+        $news = News::find($id);
+
+        $this->validate($request,
+            [
+
+                'name'=>'required|',
+                'desc'=>'required',
+                'contents'=>'required'
+            ],
+            [
+                'name.required' => 'Bạn chưa nhập tiêu đề',
+
+                'desc.required' => 'Bạn chưa nhập tiêu đề',
+                'contents.required' => 'Bạn chưa nhập nội dung'
+            ]);
+
+        $news->category_id = $request->category;
+
+        $news->name = $request->name;
+        $news->desc = $request->desc;
+        $news->contents = $request->contents;
+        $news->status = $request->status;
+        $news->views = 0;
+//        var_dump($news);
+//        die();
+        if($request->hasFile('image')) {
+            $file = $request->file('image');
+            $path = $file->getClientOriginalExtension();
+            //  kiem tra duoi file
+            if ($path != 'jpg' && $path != 'png') {
+                return redirect('admin/category/add')->with('message', 'Bạn phải chọn file ảnh');
+            }
+            $name = $file->getClientOriginalName();
+            $image = str_random(4) . "_" . $name;
+
+            // Tranh trung ten image
+            while (file_exists("uploads/news/" . $image)) {
+                $image = str_random(4) . "_" . $name;
+            }
+            $file->move("uploads/news", $image);
+
+            unlink("uploads/news/".$news->image); //xoa hinh cu
+            $news->image = $image;
+        }
+
+
+        $news->save();
+
+        return redirect('admin/category/add')->with('message', 'Sửa tin tức thành công');
     }
 }
