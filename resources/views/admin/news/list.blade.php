@@ -34,7 +34,7 @@
                     </td>
                     <td>{{$item->category->name}}</td>
                     <td>{{$item->desc}}</td>
-                    <td>{{$item->content}}</td>
+                    <td>{{$item->contents}}</td>
                     <td>{{$item->views}}</td>
                     <td>
                         @if($item->status == 0)

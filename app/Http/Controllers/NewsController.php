@@ -64,7 +64,7 @@ class NewsController extends Controller
             $news->image = "";
         }
         $news->save();
-        return redirect('admin/news/edit')->with('message', 'Thêm thành công');
+        return redirect('admin/news/add')->with('message', 'Thêm thành công');
     }
 
     //  Xoa tin tuc
