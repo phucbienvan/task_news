@@ -36,6 +36,8 @@ Route::group(['prefix'=>'admin'], function (){
         Route::get('list', 'NewsController@getList');
         Route::get('edit', 'NewsController@getEdit');
         Route::get('add', 'NewsController@getAdd');
+        Route::post('add', 'NewsController@postAdd');
+        Route::get('delete/{id}', 'NewsController@getDelete');
 
     });
 
