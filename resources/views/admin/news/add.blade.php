@@ -62,7 +62,7 @@
                     </div>
                     <button type="submit" class="btn btn-default">News Add</button>
                     <button type="reset" class="btn btn-default">Reset</button>
-                    <form>
+                    </form>
             </div>
         </div>
         <!-- /.row -->

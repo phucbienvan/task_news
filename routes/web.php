@@ -42,11 +42,21 @@ Route::group(['prefix'=>'admin'], function (){
 
     });
 
+    //  comment
+    Route::group(['prefix'=>'comment'], function(){
+//        Route::get('list', 'CommentController@getList');
+        Route::get('delete/{id}/{news_id}', 'CommentController@getDelete');
+
+    });
+
     // Slide
     Route::group(['prefix'=>'slide'], function(){
         Route::get('list', 'SlideController@getList');
-        Route::get('edit', 'SlideController@getEdit');
+        Route::get('edit/{id}', 'SlideController@getEdit');
+        Route::post('edit/{id}', 'SlideController@postEdit');
         Route::get('add', 'SlideController@getAdd');
+        Route::post('add', 'SlideController@postAdd');
+        Route::get('delete/{id}', 'SlideController@getDelete');
 
     });
 

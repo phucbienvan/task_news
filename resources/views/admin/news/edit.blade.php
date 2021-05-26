@@ -96,7 +96,6 @@
                     <th>Ngày cập nhật</th>
 
                     <th>Delete</th>
-                    <th>Edit</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -107,9 +106,7 @@
                         <td>{{$item->content}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
-
-                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/comment/delete/{{$item['id']}}"> Delete</a></td>
-                        <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/category/edit/{{$item['id']}}">Edit</a></td>
+                        <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/comment/delete/{{$item->id}}/{{$news->id}}"> Delete </a></td>
                     </tr>
                 @endforeach
                 </tbody>

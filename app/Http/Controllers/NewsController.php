@@ -51,7 +51,7 @@ class NewsController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/category/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect('admin/news/add')->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -77,6 +77,7 @@ class NewsController extends Controller
         return redirect('admin/news/list')->with('message', 'xoa tin tuc thành công');
     }
 
+
     //  chinh sua tin tuc
     public function getEdit($id){
         $news = News::find($id);
@@ -84,6 +85,7 @@ class NewsController extends Controller
 
         return view('admin.news.edit', compact('news', 'category'));
     }
+
     public function postEdit(Request $request,$id){
         $news = News::find($id);
 
