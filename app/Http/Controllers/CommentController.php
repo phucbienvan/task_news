@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class CommentController extends Controller
 {
-    public function getDelete($id, $news_id){
+    public function getDelete($id, $newsId){
         $comment = Comment::find($id);
         $comment->delete();
-        return redirect('admin/news/edit/'.$news_id)->with('message', 'xoa Bình luận thành công');
+        return redirect('admin/news/edit/'.$newsId)->with('message', 'xoa Bình luận thành công');
     }
 }
