@@ -117,7 +117,7 @@ class NewsController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/category/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect('admin/news/add')->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -135,6 +135,6 @@ class NewsController extends Controller
 
         $news->save();
 
-        return redirect('admin/category/add')->with('message', 'Sửa tin tức thành công');
+        return redirect('admin/category/edit/'.$id)->with('message', 'Sửa tin tức thành công');
     }
 }

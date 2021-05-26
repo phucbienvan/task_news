@@ -63,8 +63,15 @@ Route::group(['prefix'=>'admin'], function (){
     // User
     Route::group(['prefix'=>'user'], function(){
         Route::get('list', 'UserController@getList');
-        Route::get('edit', 'UserController@getEdit');
+
+        Route::get('edit/{id}', 'UserController@getEdit');
+        Route::post('edit/{id}', 'UserController@postEdit');
+
         Route::get('add', 'UserController@getAdd');
+        Route::post('add', 'UserController@postAdd');
+
+        Route::get('delete/{id}', 'UserController@getDelete');
+
 
     });
 });

@@ -96,7 +96,7 @@ class SlideController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/category/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect('admin/slide/add')->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -105,7 +105,7 @@ class SlideController extends Controller
             while (file_exists("uploads/news/" . $image)) {
                 $image = str_random(4) . "_" . $name;
             }
-            $file->move("uploads/news", $image);
+            $file->move("uploads/slides", $image);
 
             unlink("uploads/slides/".$slide->image); //xoa hinh cu
             $slide->image = $image;
@@ -114,8 +114,15 @@ class SlideController extends Controller
 
         $slide->save();
 
-        return redirect('admin/slide/add')->with('message', 'Sửa slide thành công');
+        return redirect('admin/slide/edit'.$id)->with('message', 'Sửa slide thành công');
 
+    }
+
+    public function getDelete($id){
+        $slide = Slide::find($id);
+
+        $slide->delete();
+        return redirect('admin/slide/list')->with('message', 'xoa slide thành công');
     }
 
 }
