@@ -24,7 +24,7 @@
                         {{session('message')}}
                     </div>
                 @endif
-                <form action="admin/user/add" method="post" enctype="multipart/form-data">
+                <form action="{{route('user.add')}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
 
                     <div class="form-group">

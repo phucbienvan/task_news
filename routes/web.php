@@ -23,57 +23,57 @@ Route::group(['prefix'=>'admin'], function (){
 
     // Danh muc
     Route::group(['prefix'=>'category'], function(){
-        Route::get('/', 'CategoryController@getList');
-        Route::get('list', 'CategoryController@getList');
-        Route::get('edit/{id}', 'CategoryController@getEdit');
-        Route::post('edit/{id}', 'CategoryController@postEdit');
-        Route::get('add', 'CategoryController@getAdd');
-        Route::post('add', 'CategoryController@postAdd');
-        Route::get('delete/{id}', 'CategoryController@getDelete');
+        Route::get('/', 'CategoryController@getList')->name('category.list');
+        Route::get('list', 'CategoryController@getList')->name('category.list');
+        Route::get('edit/{id}', 'CategoryController@getEdit')->name('category.edit');
+        Route::post('edit/{id}', 'CategoryController@postEdit')->name('category.edit');
+        Route::get('add', 'CategoryController@getAdd')->name('category.add');
+        Route::post('add', 'CategoryController@postAdd')->name('category.add');
+        Route::get('delete/{id}', 'CategoryController@getDelete')->name('category.delete');
 
 
     });
 
     // tin tuc
     Route::group(['prefix'=>'news'], function(){
-        Route::get('list', 'NewsController@getList');
-        Route::get('edit/{id}', 'NewsController@getEdit');
-        Route::post('edit/{id}', 'NewsController@postEdit');
-        Route::get('add', 'NewsController@getAdd');
-        Route::post('add', 'NewsController@postAdd');
-        Route::get('delete/{id}', 'NewsController@getDelete');
+        Route::get('list', 'NewsController@getList')->name('news.list');
+        Route::get('edit/{id}', 'NewsController@getEdit')->name('news.edit');
+        Route::post('edit/{id}', 'NewsController@postEdit')->name('news.edit');
+        Route::get('add', 'NewsController@getAdd')->name('news.add');
+        Route::post('add', 'NewsController@postAdd')->name('news.add');
+        Route::get('delete/{id}', 'NewsController@getDelete')->name('news.delete');
 
     });
 
     //  comment
     Route::group(['prefix'=>'comment'], function(){
 //        Route::get('list', 'CommentController@getList');
-        Route::get('delete/{id}/{news_id}', 'CommentController@getDelete');
+        Route::get('delete/{id}/{news_id}', 'CommentController@getDelete')->name('comment.delete');
 
     });
 
     // Slide
     Route::group(['prefix'=>'slide'], function(){
-        Route::get('list', 'SlideController@getList');
-        Route::get('edit/{id}', 'SlideController@getEdit');
-        Route::post('edit/{id}', 'SlideController@postEdit');
-        Route::get('add', 'SlideController@getAdd');
-        Route::post('add', 'SlideController@postAdd');
-        Route::get('delete/{id}', 'SlideController@getDelete');
+        Route::get('list', 'SlideController@getList')->name('slide.list');
+        Route::get('edit/{id}', 'SlideController@getEdit')->name('slide.edit');
+        Route::post('edit/{id}', 'SlideController@postEdit')->name('slide.edit');
+        Route::get('add', 'SlideController@getAdd')->name('slide.add');
+        Route::post('add', 'SlideController@postAdd')->name('slide.add');
+        Route::get('delete/{id}', 'SlideController@getDelete')->name('slide.delete');
 
     });
 
     // User
     Route::group(['prefix'=>'user'], function(){
-        Route::get('list', 'UserController@getList');
+        Route::get('list', 'UserController@getList')->name('user.list');
 
-        Route::get('edit/{id}', 'UserController@getEdit');
-        Route::post('edit/{id}', 'UserController@postEdit');
+        Route::get('edit/{id}', 'UserController@getEdit')->name('user.edit');
+        Route::post('edit/{id}', 'UserController@postEdit')->name('user.edit');
 
-        Route::get('add', 'UserController@getAdd');
-        Route::post('add', 'UserController@postAdd');
+        Route::get('add', 'UserController@getAdd')->name('user.add');
+        Route::post('add', 'UserController@postAdd')->name('user.add');
 
-        Route::get('delete/{id}', 'UserController@getDelete');
+        Route::get('delete/{id}', 'UserController@getDelete')->name('user.delete');
 
 
     });

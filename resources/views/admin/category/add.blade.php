@@ -25,7 +25,7 @@
                        {{session('message')}}
                    </div>
                     @endif
-                <form action="admin/category/add" method="post">
+                <form action="{{route('category.add')}}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label>Category Name</label>

@@ -31,8 +31,8 @@
                     <td>{{$item['id']}}</td>
                     <td>{{$item['name']}}</td>
                     <td>{{$item['desc']}}</td>
-                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/category/delete/{{$item['id']}}"> Delete</a></td>
-                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/category/edit/{{$item['id']}}">Edit</a></td>
+                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('category.delete', $item['id'])}}"> Delete</a></td>
+                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('category.edit', $item['id'])}}">Edit</a></td>
                 </tr>
                 @endforeach
                 </tbody>

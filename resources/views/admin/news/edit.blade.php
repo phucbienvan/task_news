@@ -22,7 +22,7 @@
                         {{session('message')}}
                     </div>
                 @endif
-                <form action="admin/news/edit/{{$news->id}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('news.edit', $news->id)}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label>Category</label>

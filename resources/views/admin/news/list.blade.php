@@ -44,8 +44,8 @@
                         @endif
 
                     </td>
-                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/news/delete/{{$item->id}}"> Delete</a></td>
-                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/news/edit/{{$item->id}}">Edit</a></td>
+                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('news.delete', $item->id)}}"> Delete</a></td>
+                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('news.edit', $item->id)}}">Edit</a></td>
                 </tr>
                 @endforeach
                 </tbody>

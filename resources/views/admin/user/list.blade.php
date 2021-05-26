@@ -43,8 +43,8 @@
                             {{"Customer"}}
                         @endif
                     </td>
-                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/user/delete/{{$item->id}}"> Delete</a></td>
-                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/user/edit/{{$item->id}}">Edit</a></td>
+                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('user.delete', $item->id)}}"> Delete</a></td>
+                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('user.edit', $item->id)}}">Edit</a></td>
                 </tr>
                 @endforeach
                 </tbody>

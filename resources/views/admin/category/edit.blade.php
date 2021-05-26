@@ -23,7 +23,7 @@
                         {{session('message')}}
                     </div>
                 @endif
-                <form action="admin/category/edit/{{$category->id}}" method="post">
+                <form action="{{route('category.edit',$category->id)}}" method="post">
                     {{csrf_field()}}
                     <div class="form-group">
                         <label>Category Name</label>

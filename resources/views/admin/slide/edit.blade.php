@@ -22,7 +22,7 @@
                         {{session('message')}}
                     </div>
                 @endif
-                <form action="admin/slide/edit/{{$slide->id}}" method="post" enctype="multipart/form-data">
+                <form action="{{route('slide.edit', $slide->id)}}" method="post" enctype="multipart/form-data">
                     {{csrf_field()}}
 
                     <div class="form-group">

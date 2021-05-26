@@ -32,8 +32,8 @@
                     </td>
                     <td>{{$item->desc}}</td>
                     <td>{{$item->link}}</td>
-                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/slide/delete/{{$item->id}}"> Delete</a></td>
-                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="admin/slide/edit/{{$item->id}}">Edit</a></td>
+                    <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="{{route('slide.delete', $item->id)}}"> Delete</a></td>
+                    <td class="center"><i class="fa fa-pencil fa-fw"></i> <a href="{{route('slide.edit', $item->id)}}">Edit</a></td>
                 </tr>
                 @endforeach
                 </tbody>
