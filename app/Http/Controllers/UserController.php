@@ -126,4 +126,8 @@ class UserController extends Controller
         $user->delete();
         return redirect('admin/user/list')->with('message', 'xoa user thành công');
     }
+
+    public function getLoginAdmin(){
+        return view('admin.login');
+    }
 }

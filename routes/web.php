@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('admin.category.list');
 });
 
+
+Route::get('admin/login', 'UserController@getLoginAdmin');
+Route::post('admin/login', 'UserController@postLoginAdmin');
 //  Admin
 Route::group(['prefix'=>'admin'], function (){
 
