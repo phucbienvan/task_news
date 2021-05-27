@@ -60,7 +60,7 @@
                         </form>
                     </div>
                 @endif
-                
+
                 <hr>
 
                 @foreach($news->Comment as $comment)

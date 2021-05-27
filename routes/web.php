@@ -21,8 +21,8 @@ Route::post('/dang-nhap', 'PagesController@postLogin');
 Route::get('/dang-xuat', 'PagesController@getLogout');
 
 Route::post('comment/{newsId}','CommentController@postComment');
-Route::get('/customer/', 'PagesController@getCustomer');
-Route::post('/customer/', 'PagesController@postCustomer');
+Route::get('/customer/', 'PagesController@getCustomer');    // chinh sua nguoi dung
+Route::post('/customer/', 'PagesController@postCustomer');  //chinh sua nguoi dung
 Route::get('/dangki', 'PagesController@getRegister');
 Route::post('/dangki', 'PagesController@postRegister');
 
@@ -30,7 +30,7 @@ Route::post('/dangki', 'PagesController@postRegister');
 
 
 
-
+Route::get('admin','UserController@getLoginAdmin');
 Route::get('admin/login','UserController@getLoginAdmin');
 Route::post('admin/login','UserController@postLoginAdmin');
 Route::get('admin/logout','UserController@getLogoutAdmin');

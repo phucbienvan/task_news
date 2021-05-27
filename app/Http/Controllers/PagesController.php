@@ -19,8 +19,7 @@ class PagesController extends Controller
             'slide' => Slide::all()
         ];
         view()->share('data',$data);
-
-
+        
     }
 
     public function home(){
@@ -29,6 +28,7 @@ class PagesController extends Controller
         return view('pages.home', compact('news', 'newsOrther'));
     }
 
+    // lien he
     public function contact(){
 
         return view('pages.contact');
@@ -45,10 +45,16 @@ class PagesController extends Controller
         return view('pages.detail', compact('news'));
     }
 
+
+
+    // dang nhap nguoi dung
+
     public function getLogin(){
         return view('pages.login');
     }
 
+
+    // dang nhap nguoi dung
     public function postLogin(Request $request){
         $this->validate($request,
             [
