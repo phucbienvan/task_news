@@ -10,6 +10,7 @@
                 </h1>
             </div>
             <!-- /.col-lg-12 -->
+
             @if(session('message'))
                 <div class="alert alert-success">
                     {{session('message')}}

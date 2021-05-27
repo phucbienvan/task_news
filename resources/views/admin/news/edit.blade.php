@@ -103,7 +103,7 @@
                     <tr class="odd gradeX" align="center">
                         <td>{{$item->id}}</td>
                         <td>{{$item->user->name}}</td>
-                        <td>{{$item->content}}</td>
+                        <td>{{$item->contents}}</td>
                         <td>{{$item->created_at}}</td>
                         <td>{{$item->updated_at}}</td>
                         <td class="center"><i class="fa fa-trash-o  fa-fw"></i><a href="admin/comment/delete/{{$item->id}}/{{$news->id}}"> Delete </a></td>

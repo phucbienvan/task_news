@@ -15,7 +15,7 @@ class CommentTableSeeder extends Seeder
             'user_id' => 2,
             'news_id' => 1,
             'category_id' => 1,
-            'content' => 'hay',
+            'contents' => 'hay',
             'created_at' => new DateTime()
         ]);
     }

@@ -34,18 +34,30 @@
                     <h3 class="panel-title">Please Login</h3>
                 </div>
                 <div class="panel-body">
-                    <form role="form" action="admin/login" method="POST">
-                        {{csrf_field()}}
-                        <fieldset>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="name" type="text" autofocus>
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" placeholder="Password" name="password" type="password" value="">
-                            </div>
-                            <button type="submit" class="btn btn-lg btn-success btn-block">Login</button>
-                        </fieldset>
-                    </form>
+                    @if(count($errors) >0)
+                        <div class="alert alert-danger">
+                            @foreach($errors->all() as $item)
+                                {{$item}}<br>
+                            @endforeach
+                        </div>
+                    @endif
+                    @if(session('message'))
+                            {{session('message')}}
+                    @endif
+<div>
+                        <form role="form" action="admin/login" method="post">
+                            @csrf
+                            <fieldset>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Địa chỉ Email" name="email" type="email" autofocus>
+                                </div>
+                                <div class="form-group">
+                                    <input class="form-control" placeholder="Mật Khẩu" name="password" type="password" value="">
+                                </div>
+                                <button type="submit" class="btn btn-lg btn-success btn-block">Đăng Nhập</button>
+                            </fieldset>
+                        </form>
+</div>
                 </div>
             </div>
         </div>

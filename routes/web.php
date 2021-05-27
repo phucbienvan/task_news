@@ -11,15 +11,32 @@
 |
 */
 
-Route::get('/', function () {
-    return view('admin.category.list');
-});
+Route::get('/', 'PagesController@home');
+Route::get('/home', 'PagesController@home');
+Route::get('/contact', 'PagesController@contact');
+Route::get('category/{id}','PagesController@category');
+Route::get('news/{id}','PagesController@news');
+Route::get('/dang-nhap', 'PagesController@getLogin');
+Route::post('/dang-nhap', 'PagesController@postLogin');
+Route::get('/dang-xuat', 'PagesController@getLogout');
+
+Route::post('comment/{newsId}','CommentController@postComment');
+Route::get('/customer/', 'PagesController@getCustomer');
+Route::post('/customer/', 'PagesController@postCustomer');
+Route::get('/dangki', 'PagesController@getRegister');
+Route::post('/dangki', 'PagesController@postRegister');
 
 
-Route::get('admin/login', 'UserController@getLoginAdmin');
-Route::post('admin/login', 'UserController@postLoginAdmin');
+
+
+
+
+Route::get('admin/login','UserController@getLoginAdmin');
+Route::post('admin/login','UserController@postLoginAdmin');
+Route::get('admin/logout','UserController@getLogoutAdmin');
+
 //  Admin
-Route::group(['prefix'=>'admin'], function (){
+Route::group(['prefix'=>'admin', 'middleware'=>'adminLogin'], function (){
 
     // Danh muc
     Route::group(['prefix'=>'category'], function(){
@@ -78,3 +95,11 @@ Route::group(['prefix'=>'admin'], function (){
 
     });
 });
+
+
+
+
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

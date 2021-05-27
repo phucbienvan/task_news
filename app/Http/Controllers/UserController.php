@@ -3,7 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use Illuminate\Support\Facades\Redirect;
+use Session;
 use Illuminate\Http\Request;
+use Auth;
+
+use Illuminate\Support\Facades\DB;
 
 class UserController extends Controller
 {
@@ -34,7 +39,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         $user->level = $request->level;
 
 //
@@ -51,7 +56,7 @@ class UserController extends Controller
             $image = str_random(4) . "_" . $name;
 
             // Tranh trung ten image
-            while (file_exists("uploads/news/" . $image)) {
+            while (file_exists("uploads/users/" . $image)) {
                 $image = str_random(4) . "_" . $name;
             }
             $file->move("uploads/users", $image);
@@ -91,7 +96,7 @@ class UserController extends Controller
 
         $user->name = $request->name;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = bcrypt($request->password);
         $user->level = $request->level;
 
         if ($request->hasFile('image')) {
@@ -110,7 +115,7 @@ class UserController extends Controller
             }
             $file->move("uploads/users", $image);
 
-            unlink("uploads/slides/" . $user->image); //xoa hinh cu
+            unlink("uploads/users/" . $user->image); //xoa hinh cu
             $user->image = $image;
         }
 
@@ -127,7 +132,36 @@ class UserController extends Controller
         return redirect('admin/user/list')->with('message', 'xoa user thành công');
     }
 
+    // Dang nhap
     public function getLoginAdmin(){
         return view('admin.login');
+    }
+
+    public function postLoginAdmin(Request $request){
+        $this->validate($request,
+            [
+                'email' => 'required',
+                'password' => 'required'
+            ],
+            [
+                'email.required' => 'Bạn chưa nhập email ',
+                'password.required' => 'Bạn chưa nhập mat khau'
+            ]);
+
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
+            // Authentication passed...
+            return redirect('admin/category/list'   );
+        }
+        else
+            return redirect('admin/login')->with('message','Đăng Nhập không thành công!');
+
+
+    }
+
+
+    // Dang xuat
+    public function getLogoutAdmin(){
+        Auth::logout();
+        return redirect('admin/login');
     }
 }

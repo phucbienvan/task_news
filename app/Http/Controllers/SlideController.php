@@ -114,10 +114,9 @@ class SlideController extends Controller
 
         $slide->save();
 
-        return redirect('admin/slide/edit'.$id)->with('message', 'Sửa slide thành công');
+        return redirect('admin/slide/edit/'.$id)->with('message', 'Sửa slide thành công');
 
     }
-
     public function getDelete($id){
         $slide = Slide::find($id);
 
