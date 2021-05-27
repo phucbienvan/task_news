@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 use Session;
 use Illuminate\Http\Request;
@@ -23,13 +23,11 @@ class UserController extends Controller
     public function postAdd(Request $request){
         $this->validate($request,
             [
-
                 'name'=>'required|unique:news,name',
                 'email'=>'required',
                 'password'=>'required'
             ],
             [
-
                 'name.required' => 'Bạn chưa nhập tiêu đề',
                 'name.unique' => 'Tiêu đề đã tồn tại',
                 'email.required' => 'Bạn chưa nhập email',
@@ -42,9 +40,6 @@ class UserController extends Controller
         $user->password = bcrypt($request->password);
         $user->level = $request->level;
 
-//
-//        var_dump($news);
-//        die();
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
@@ -65,7 +60,7 @@ class UserController extends Controller
             $user->image = "";
         }
         $user->save();
-        return redirect('admin/user/add')->with('message', 'Thêm thành công');
+        return redirect()->back()->with('message', 'Thêm thành công');
     }
 
     // Chinh sua user
@@ -78,22 +73,17 @@ class UserController extends Controller
     public function postEdit(Request $request, $id)
     {
         $user = User::find($id);
-
         $this->validate($request,
             [
-
                 'name' => 'required|',
-                'email' => 'required',
+                'email'=> 'required',
                 'password' => 'required'
             ],
             [
+                'email'=> 'Bạn chưa nhập email',
                 'name.required' => 'Bạn chưa nhập tiêu đề',
-
-                'email.required' => 'Bạn chưa nhập email ',
                 'password.required' => 'Bạn chưa nhập mat khau'
             ]);
-
-
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
@@ -104,7 +94,7 @@ class UserController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/user/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -114,22 +104,18 @@ class UserController extends Controller
                 $image = str_random(4) . "_" . $name;
             }
             $file->move("uploads/users", $image);
-
             unlink("uploads/users/" . $user->image); //xoa hinh cu
             $user->image = $image;
         }
-
-
         $user->save();
-
-        return redirect('admin/user/edit/'.$id)->with('message', 'Sửa user thành công');
+        return redirect()->back()->with('message', 'Sửa user thành công');
     }
 
     // Xoa user
     public function getDelete($id){
         $user = User::find($id);
         $user->delete();
-        return redirect('admin/user/list')->with('message', 'xoa user thành công');
+        return redirect()->back()->with('message', 'xoa user thành công');
     }
 
     // Dang nhap
@@ -150,18 +136,15 @@ class UserController extends Controller
 
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // Authentication passed...
-            return redirect('admin/category/list'   );
+            return redirect()->route('category.list');
         }
         else
-            return redirect('admin/login')->with('message','Đăng Nhập không thành công!');
-
-
+            return redirect()->back()->with('message','Đăng Nhập không thành công!');
     }
-
 
     // Dang xuat
     public function getLogoutAdmin(){
         Auth::logout();
-        return redirect('admin/login');
+        return redirect()->route('admin.login');
     }
 }

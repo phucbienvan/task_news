@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\Comment;
-use App\News;
-use App\Slide;
-use App\User;
+use App\Models\Category;
+use App\Models\Comment;
+use App\Models\News;
+use App\Models\Slide;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +19,7 @@ class PagesController extends Controller
             'slide' => Slide::all()
         ];
         view()->share('data',$data);
-        
+
     }
 
     public function home(){

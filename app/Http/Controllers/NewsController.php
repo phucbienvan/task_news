@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\News;
-use App\Comment;
+use App\Models\Category;
+use App\Models\News;
+use App\Models\Comment;
 
 use Illuminate\Http\Request;
 
@@ -43,7 +43,6 @@ class NewsController extends Controller
         $news->contents = $request->contents;
         $news->status = $request->status;
         $news->views = 0;
-//
 //        var_dump($news);
 //        die();
         if($request->hasFile('image')) {
@@ -51,7 +50,7 @@ class NewsController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/news/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -66,15 +65,14 @@ class NewsController extends Controller
             $news->image = "";
         }
         $news->save();
-        return redirect('admin/news/add')->with('message', 'Thêm thành công');
+        return redirect()->route('news.add')->with('message', 'thêm thành công');
     }
 
     //  Xoa tin tuc
     public function getDelete($id){
         $news = News::find($id);
-
         $news->delete();
-        return redirect('admin/news/list')->with('message', 'xoa tin tuc thành công');
+        return redirect()->back()->with('message', 'xoa tin tuc thành công');
     }
 
 
@@ -117,7 +115,7 @@ class NewsController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/news/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -135,6 +133,6 @@ class NewsController extends Controller
 
         $news->save();
 
-        return redirect('admin/category/edit/'.$id)->with('message', 'Sửa tin tức thành công');
+        return redirect()->back()->with('message', 'Sửa tin tức thành công');
     }
 }

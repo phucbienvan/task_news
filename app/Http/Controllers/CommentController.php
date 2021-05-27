@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Comment;
-use App\News;
+use App\Models\Comment;
+use App\Models\News;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -12,7 +12,7 @@ class CommentController extends Controller
     public function getDelete($id, $newsId){
         $comment = Comment::find($id);
         $comment->delete();
-        return redirect('admin/news/edit/'.$newsId)->with('message', 'xoa Bình luận thành công');
+        return redirect()->back()->with('message', 'Xóa thành công');
     }
 
     public function postComment($newsId,Request $request){
@@ -30,7 +30,7 @@ class CommentController extends Controller
         $comment->category_id= $news->category_id;
         $comment->contents = $request->contents;
         $comment->save();
+        return redirect()->back()->with('message', 'đăng thành công');
 
-        return redirect('news/'.$news->id)->with('message','Bình Luận đã được đăng!');
     }
 }

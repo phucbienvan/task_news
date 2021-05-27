@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
@@ -33,9 +33,8 @@ class CategoryController extends Controller
         $category = new Category();
         $category->name = $request->name;
         $category->desc = $request->desc;
-
         $category->save();
-        return redirect('admin/category/add')->with('message', 'Thêm thành công');
+        return redirect()->route('category.add')->with('message', 'Thêm thành công');;
     }
 
     //  Sua danh muc
@@ -58,13 +57,13 @@ class CategoryController extends Controller
         $category->name = $request->name;
         $category->desc = $request->desc;
         $category->save();
-        return redirect('admin/category/edit/'.$id)->with('message', 'sửa danh mục thành công');
+        return redirect()->route('category.edit', $id)->with('message', 'Sửa thành công');
     }
 
     //  Xoa danh muc
     public function getDelete($id){
         $category = Category::find($id);
         $category->delete();
-        return redirect('admin/category/list')->with('message', 'xoa danh mục thành công');
+        return redirect()->back();
     }
 }

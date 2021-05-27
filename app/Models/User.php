@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -38,7 +38,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
     public function comment(){
-        return $this->hasMany('App\Comment', 'user_id', 'id');
+        return $this->hasMany('App\Models\Comment', 'user_id', 'id');
     }
 
 }

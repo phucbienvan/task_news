@@ -31,7 +31,7 @@ Route::post('/dangki', 'PagesController@postRegister');
 
 
 Route::get('admin','UserController@getLoginAdmin');
-Route::get('admin/login','UserController@getLoginAdmin');
+Route::get('admin/login','UserController@getLoginAdmin')->name('admin.login');
 Route::post('admin/login','UserController@postLoginAdmin');
 Route::get('admin/logout','UserController@getLogoutAdmin');
 

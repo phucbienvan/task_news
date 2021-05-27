@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Slide;
+use App\Models\Slide;
 use Illuminate\Http\Request;
 
 class SlideController extends Controller
@@ -18,13 +18,11 @@ class SlideController extends Controller
     public function postAdd(Request $request){
         $this->validate($request,
             [
-
                 'name'=>'required|unique:news,name',
                 'desc'=>'required',
                 'link'=>'required'
             ],
             [
-
                 'name.required' => 'Bạn chưa nhập tiêu đề',
                 'name.unique' => 'Tiêu đề đã tồn tại',
                 'desc.required' => 'Bạn chưa nhập tiêu đề',
@@ -43,7 +41,7 @@ class SlideController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/slide/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -58,22 +56,19 @@ class SlideController extends Controller
             $slide->image = "";
         }
         $slide->save();
-        return redirect('admin/slide/add')->with('message', 'Thêm thành công');
+        return redirect()->back()->with('message', 'Thêm thành công');
     }
 
     //  chinh sua slide
     public function getEdit($id){
         $slide = Slide::find($id);
-
         return view('admin.slide.edit', compact('slide'));
     }
 
     public function postEdit(Request $request, $id){
         $slide = Slide::find($id);
-
         $this->validate($request,
             [
-
                 'name'=>'required|',
                 'desc'=>'required',
                 'link'=>'required'
@@ -84,9 +79,6 @@ class SlideController extends Controller
                 'desc.required' => 'Bạn chưa nhập mô tả ',
                 'link.required' => 'Bạn chưa nhập link'
             ]);
-
-
-
         $slide->name = $request->name;
         $slide->desc = $request->desc;
         $slide->link = $request->link;
@@ -96,7 +88,7 @@ class SlideController extends Controller
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/slide/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -113,15 +105,14 @@ class SlideController extends Controller
 
 
         $slide->save();
-
-        return redirect('admin/slide/edit/'.$id)->with('message', 'Sửa slide thành công');
+        return redirect()->back()->with('message', 'Sửa slide thành công');
 
     }
     public function getDelete($id){
         $slide = Slide::find($id);
 
         $slide->delete();
-        return redirect('admin/slide/list')->with('message', 'xoa slide thành công');
+        return redirect()->back()->with('message', 'xoa slide thành công');
     }
 
 }
