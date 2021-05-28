@@ -20,16 +20,16 @@
                         <div class="row-item row">
                             <div class="col-md-3">
 
-                                <a href="tin-tuc/{{ $chitiet->id }}.html">
+                                <a href="{{route('detail', $chitiet->id)}}.html">
                                     <br>
                                     <img width="200px" height="200px" class="img-responsive" src="uploads/news/{{ $chitiet->image }}" alt="">
                                 </a>
                             </div>
 
                             <div class="col-md-9">
-                                <h3><a href="news/{{ $chitiet->id }}.html">{{ $chitiet->name }}</a></h3>
+                                <h3><a href="{{route('detail', $chitiet->id)}}.html">{{ $chitiet->name }}</a></h3>
                                 <p>{!! $chitiet->desc !!}</p>
-                                <a class="btn btn-primary" href="news/{{ $chitiet->id }}.html">Xem Thêm.. <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                <a class="btn btn-primary" href="{{route('detail', $chitiet->id)}}.html">Xem Thêm.. <span class="glyphicon glyphicon-chevron-right"></span></a>
                             </div>
                             <div class="break"></div>
                         </div>

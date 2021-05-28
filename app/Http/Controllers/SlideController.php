@@ -29,13 +29,10 @@ class SlideController extends Controller
                 'link.required' => 'Bạn chưa nhập nội dung'
             ]);
         $slide = new Slide();
-
         $slide->name = $request->name;
         $slide->desc = $request->desc;
         $slide->link = $request->link;
-//
-//        var_dump($news);
-//        die();
+
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
@@ -87,7 +84,8 @@ class SlideController extends Controller
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
-            if ($path != 'jpg' && $path != 'png') {
+            $fileHopLe = ['png', 'jpg', 'jepg'];
+            if($path != $fileHopLe){
                 return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
@@ -98,15 +96,11 @@ class SlideController extends Controller
                 $image = str_random(4) . "_" . $name;
             }
             $file->move("uploads/slides", $image);
-
             unlink("uploads/slides/".$slide->image); //xoa hinh cu
             $slide->image = $image;
         }
-
-
         $slide->save();
         return redirect()->back()->with('message', 'Sửa slide thành công');
-
     }
     public function getDelete($id){
         $slide = Slide::find($id);

@@ -28,7 +28,7 @@
                                 <strong>{{ session('message') }}</strong>
                             </div>
                         @endif
-                        <form action="customer" method="POST">
+                        <form action="{{route('edit.customer')}}" method="POST">
                             {{ csrf_field() }}
                             <div>
                                 <label>Tên Người Dùng</label>
@@ -37,7 +37,7 @@
                             <br>
                             <div class="form-group">
                                 <label> Image</label><br>
-                                <img width="500px" src="uploads/users/{{$customer->image}}"><br>
+                                <img width="500px" class="img-responsive" src="{{asset('uploads/users/' . $customer->image)}}">
                                 <input type="file" class="form-control" name="image" placeholder="Please Enter image" />
                             </div>
                             <div>

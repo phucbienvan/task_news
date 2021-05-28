@@ -9,19 +9,11 @@
             <!-- Blog Post Content Column -->
             <div class="col-lg-9">
 
-                <!-- Blog Post -->
-
-                <!-- Title -->
                 <h1>{{ $news->name }}</h1>
 
-                <!-- Author -->
-                <!-- Preview Image -->
-                <img class="img-responsive" src="uploads/news/{{ $news->image }}" alt="Hình ảnh của bài viết">
-
-
+                <img class="img-responsive" src="{{asset('uploads/news/' . $news->image)}}">
                 <hr>
 
-                <!-- Post Content -->
                 <p class="lead">
                     {!! $news->desc !!}
                 </p>
@@ -51,7 +43,7 @@
                                 <strong>{{ session('message') }}</strong>
                             </div>
                         @endif
-                        <form role="form" method="POST" action="comment/{{$news->id }}">
+                        <form role="form" method="POST" action="{{route('comment.customer', $news->id)}}">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <textarea name="contents" class="form-control" rows="3"></textarea>
@@ -70,7 +62,6 @@
                             <img width="100px" class="media-object" src="uploads/users/{{$comment->user->image}}" alt="">
                         </a>
                         <div class="media-body">
-
                             {{ $comment->contents }}
                         </div>
                     </div>

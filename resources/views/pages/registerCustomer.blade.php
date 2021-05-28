@@ -24,7 +24,7 @@
                             {{session('message')}}
                         </div>
                     @endif
-                    <form action="dangki" method="post" enctype="multipart/form-data">
+                    <form action="{{route('register.customer')}}" method="post" enctype="multipart/form-data">
                         {{csrf_field()}}
 
                         <div class="form-group">

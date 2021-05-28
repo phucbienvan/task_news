@@ -19,7 +19,6 @@ class PagesController extends Controller
             'slide' => Slide::all()
         ];
         view()->share('data',$data);
-
     }
 
     public function home(){
@@ -45,14 +44,11 @@ class PagesController extends Controller
         return view('pages.detail', compact('news'));
     }
 
-
-
     // dang nhap nguoi dung
 
     public function getLogin(){
         return view('pages.login');
     }
-
 
     // dang nhap nguoi dung
     public function postLogin(Request $request){
@@ -65,13 +61,12 @@ class PagesController extends Controller
                 'email.required' => 'Bạn chưa nhập email ',
                 'password.required' => 'Bạn chưa nhập mat khau'
             ]);
-
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
             // Authentication passed...
             return redirect('/'   );
         }
         else
-            return redirect('dang-nhap')->with('message','Đăng Nhập không thành công!');
+            return redirect()->back()->with('message','Đăng Nhập không thành công!');
 
     }
 
@@ -86,23 +81,19 @@ class PagesController extends Controller
         if(Auth::check())
             return view('pages.customer',['customer' => Auth::user()]);
         else
-            return redirect('dang-nhap')->with('message','Bạn chưa Đăng Nhập!');
+            return redirect()->route('login.customer')->with('message','Bạn chưa Đăng Nhập!');
     }
 
     public function postCustomer(Request $request)
     {
-
-
         $this->validate($request,
             [
-
                 'name' => 'required|',
                 'email' => 'required',
                 'password' => 'required'
             ],
             [
                 'name.required' => 'Bạn chưa nhập tiêu đề',
-
                 'email.required' => 'Bạn chưa nhập email ',
                 'password.required' => 'Bạn chưa nhập mat khau'
             ]);
@@ -110,14 +101,12 @@ class PagesController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
-
-
         if ($request->hasFile('image')) {
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/user/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -127,30 +116,27 @@ class PagesController extends Controller
                 $image = str_random(4) . "_" . $name;
             }
             $file->move("uploads/users", $image);
-
             unlink("uploads/users/" . $user->image); //xoa hinh cu
             $user->image = $image;
         }
         $user->save();
+        return redirect()->back()->with('message', 'Sửa user thành công');
 
-        return redirect('customer')->with('message', 'Sửa nguoi dung thành công');
     }
 
 
     // dang ki nguoi dung
     public function getRegister(){
-        return view('pages.dangki');
+        return view('pages.registerCustomer');
     }
     public function postRegister(Request $request){
         $this->validate($request,
             [
-
                 'name'=>'required|unique:news,name',
                 'email'=>'required',
                 'password'=>'required'
             ],
             [
-
                 'name.required' => 'Bạn chưa nhập tiêu đề',
                 'name.unique' => 'Tiêu đề đã tồn tại',
                 'email.required' => 'Bạn chưa nhập email',
@@ -162,16 +148,12 @@ class PagesController extends Controller
         $user->email = $request->email;
         $user->password = bcrypt($request->password);
         $user->level= 0;
-
-//
-//        var_dump($news);
-//        die();
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
             //  kiem tra duoi file
             if ($path != 'jpg' && $path != 'png') {
-                return redirect('admin/user/add')->with('message', 'Bạn phải chọn file ảnh');
+                return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
             $image = str_random(4) . "_" . $name;
@@ -186,6 +168,6 @@ class PagesController extends Controller
             $user->image = "";
         }
         $user->save();
-        return redirect('dang-nhap')->with('message', 'Thêm thành công');
+        return redirect()->route('login.customer')->with('message', 'Thêm thành công');
     }
 }

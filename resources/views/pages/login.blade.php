@@ -19,7 +19,7 @@
                                 <strong>{{ session('message') }}</strong>
                             </div>
                         @endif
-                        <form action="dang-nhap" method="POST">
+                        <form action="{{route('login.customer')}}" method="POST">
                             {{ csrf_field() }}
                             <div>
                                 <label>Email</label>

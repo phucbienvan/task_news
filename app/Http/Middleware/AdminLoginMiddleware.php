@@ -23,6 +23,8 @@ class AdminLoginMiddleware
             }else{
                 return redirect('admin/login');
             }
+        }else{
+            return redirect()->route('admin.login');
         }
 
     }

@@ -16,7 +16,7 @@
             <ul class="nav navbar-nav">
 
                 <li>
-                    <a href="contact">Liên hệ</a>
+                    <a href="{{route('contact')}}">Liên hệ</a>
                 </li>
             </ul>
 
@@ -30,20 +30,16 @@
                             {{Auth::user()->name}}</a>
                     </li>
                     <li>
-                        <a href="dang-xuat">Đăng xuất</a>
+                        <a href="{{route('logout.customer')}}">Đăng xuất</a>
+
                     </li>
-
-
-
-
-
                 @else
 
                     <li>
-                        <a href="dangki">Đăng ký</a>
+                        <a href="{{route('register.customer')}}">Đăng ký</a>
                     </li>
                     <li>
-                        <a href="dang-nhap">Đăng nhập</a>
+                        <a href="{{route('login.customer')}}">Đăng nhập</a>
                     </li>
 
                 @endif

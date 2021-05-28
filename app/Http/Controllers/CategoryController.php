@@ -10,8 +10,6 @@ class CategoryController extends Controller
     //  Danh sach danh muc
     public function getList(){
         $category = Category::all();
-//        var_dump($category);
-//        die();
         return view('admin.category.list', compact('category'));
     }
 

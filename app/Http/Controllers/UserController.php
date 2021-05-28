@@ -17,7 +17,6 @@ class UserController extends Controller
         return view('admin.user.list', compact('user'));
     }
     public function getAdd(){
-
         return view('admin.user.add');
     }
     public function postAdd(Request $request){
@@ -66,7 +65,6 @@ class UserController extends Controller
     // Chinh sua user
     public function getEdit($id){
         $user = User::find($id);
-
         return view('admin.user.edit', compact('user'));
     }
 

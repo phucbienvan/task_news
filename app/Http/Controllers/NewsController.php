@@ -24,13 +24,11 @@ class NewsController extends Controller
     public function postAdd(Request $request){
         $this->validate($request,
             [
-
                 'name'=>'required|unique:news,name',
                 'desc'=>'required',
                 'contents'=>'required'
             ],
             [
-
                 'name.required' => 'Bạn chưa nhập tiêu đề',
                 'name.unique' => 'Tiêu đề đã tồn tại',
                 'desc.required' => 'Bạn chưa nhập tiêu đề',
@@ -43,8 +41,6 @@ class NewsController extends Controller
         $news->contents = $request->contents;
         $news->status = $request->status;
         $news->views = 0;
-//        var_dump($news);
-//        die();
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
@@ -80,7 +76,6 @@ class NewsController extends Controller
     public function getEdit($id){
         $news = News::find($id);
         $category = Category::all();
-
         return view('admin.news.edit', compact('news', 'category'));
     }
 
@@ -89,14 +84,12 @@ class NewsController extends Controller
 
         $this->validate($request,
             [
-
                 'name'=>'required|',
                 'desc'=>'required',
                 'contents'=>'required'
             ],
             [
                 'name.required' => 'Bạn chưa nhập tiêu đề',
-
                 'desc.required' => 'Bạn chưa nhập tiêu đề',
                 'contents.required' => 'Bạn chưa nhập nội dung'
             ]);
@@ -113,8 +106,8 @@ class NewsController extends Controller
         if($request->hasFile('image')) {
             $file = $request->file('image');
             $path = $file->getClientOriginalExtension();
-            //  kiem tra duoi file
-            if ($path != 'jpg' && $path != 'png') {
+            $fileHopLe = ['png', 'jpg', 'jepg'];
+            if($path != $fileHopLe){
                 return redirect()->back()->with('message', 'Bạn phải chọn file ảnh');
             }
             $name = $file->getClientOriginalName();
@@ -129,10 +122,7 @@ class NewsController extends Controller
             unlink("uploads/news/".$news->image); //xoa hinh cu
             $news->image = $image;
         }
-
-
         $news->save();
-
         return redirect()->back()->with('message', 'Sửa tin tức thành công');
     }
 }

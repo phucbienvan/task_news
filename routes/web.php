@@ -12,19 +12,18 @@
 */
 
 Route::get('/', 'PagesController@home');
-Route::get('/home', 'PagesController@home');
-Route::get('/contact', 'PagesController@contact');
-Route::get('category/{id}','PagesController@category');
-Route::get('news/{id}','PagesController@news');
-Route::get('/dang-nhap', 'PagesController@getLogin');
-Route::post('/dang-nhap', 'PagesController@postLogin');
-Route::get('/dang-xuat', 'PagesController@getLogout');
+Route::get('/contact', 'PagesController@contact')->name('contact');
+Route::get('category/{id}','PagesController@category')->name('category.customer');
+Route::get('news/{id}','PagesController@news')->name('detail');
+Route::get('/login-customer', 'PagesController@getLogin')->name('login.customer');
+Route::post('/login-customer', 'PagesController@postLogin')->name('login.customer');
+Route::get('/logout-customer', 'PagesController@getLogout')->name('logout.customer');
 
-Route::post('comment/{newsId}','CommentController@postComment');
-Route::get('/customer/', 'PagesController@getCustomer');    // chinh sua nguoi dung
-Route::post('/customer/', 'PagesController@postCustomer');  //chinh sua nguoi dung
-Route::get('/dangki', 'PagesController@getRegister');
-Route::post('/dangki', 'PagesController@postRegister');
+Route::post('comment/{newsId}','CommentController@postComment')->name('comment.customer');
+Route::get('/customer/', 'PagesController@getCustomer')->name('edit.customer');    // chinh sua nguoi dung
+Route::post('/customer/', 'PagesController@postCustomer')->name('edit.customer');  //chinh sua nguoi dung
+Route::get('/register-customer', 'PagesController@getRegister')->name('register.customer');
+Route::post('/register-customer', 'PagesController@postRegister')->name('register.customer');
 
 
 

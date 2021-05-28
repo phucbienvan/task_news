@@ -34,7 +34,7 @@
                             <div class="col-md-7">
                                 <h3>{{$item->name}}</h3>
                                 <p>{{$item->desc}}</p>
-                                <a class="btn btn-primary" href="news/{{$item->id}}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
+                                <a class="btn btn-primary" href="{{route('detail', $item->id)}}">View Project <span class="glyphicon glyphicon-chevron-right"></span></a>
                             </div>
                             @endforeach
 
@@ -42,7 +42,7 @@
                         @foreach($newsOrther as $item)
 
                         <div class="col-md-4">
-                            <a href="news/{{$item->id}}">
+                            <a href="{{route('detail', $item->id)}}">
                                 <h4>
                                     <span class="glyphicon glyphicon-list-alt"></span>
                                     {{$item->desc}}
