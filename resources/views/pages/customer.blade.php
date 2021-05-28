@@ -28,7 +28,7 @@
                                 <strong>{{ session('message') }}</strong>
                             </div>
                         @endif
-                        <form action="{{route('edit.customer')}}" method="POST">
+                        <form action="{{route('edit.customer')}}" method="POST" enctype="multipart/form-data">
                             {{ csrf_field() }}
                             <div>
                                 <label>Tên Người Dùng</label>
@@ -48,7 +48,6 @@
                             <div>
                                 <label>mat khau</label>
                                 <input type="password" class="form-control" name="password" aria-describedby="basic-addon1">
-
                             <br>
                             <button type="submit" class="btn btn-primary">Thực Hiện
                             </button>
